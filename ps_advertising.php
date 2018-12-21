@@ -129,7 +129,7 @@ class Ps_Advertising extends Module implements WidgetInterface
     }
 
     /**
-     * delete the contextual image (it is not allowed to delete the default image)
+     * delete the contextual image (it is not allowed to delete the default image).
      *
      * @return void
      */
@@ -215,7 +215,7 @@ class Ps_Advertising extends Module implements WidgetInterface
     }
 
     /**
-     * getContent used to display admin module form
+     * getContent used to display admin module form.
      *
      * @return string content
      */
