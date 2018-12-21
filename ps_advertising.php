@@ -26,7 +26,7 @@
 
 use PrestaShop\PrestaShop\Core\Module\WidgetInterface;
 
-if (!defined('_PS_VERSION_')) {
+if ( ! defined('_PS_VERSION_')) {
     exit;
 }
 
@@ -89,7 +89,7 @@ class Ps_Advertising extends Module implements WidgetInterface
 
     public function install()
     {
-        if (!parent::install()) {
+        if ( ! parent::install()) {
             return false;
         }
 
@@ -154,7 +154,7 @@ class Ps_Advertising extends Module implements WidgetInterface
 
         $errors = '';
         if (Tools::isSubmit('submitAdvConf')) {
-            if (isset($_FILES['adv_img'], $_FILES['adv_img']['tmp_name'])   && !empty($_FILES['adv_img']['tmp_name'])) {
+            if (isset($_FILES['adv_img'], $_FILES['adv_img']['tmp_name'])   && ! empty($_FILES['adv_img']['tmp_name'])) {
                 if ($error = ImageManager::validateUpload($_FILES['adv_img'], Tools::convertBytes(ini_get('upload_max_filesize')))) {
                     $errors .= $error;
                 } else {
@@ -169,7 +169,7 @@ class Ps_Advertising extends Module implements WidgetInterface
                     }
 
                     // Copy the image in the module directory with its new name
-                    if (!move_uploaded_file($_FILES['adv_img']['tmp_name'], _PS_MODULE_DIR_.$this->name.'/img/'.$this->adv_imgname.'.'.Configuration::get('BLOCKADVERT_IMG_EXT'))) {
+                    if ( ! move_uploaded_file($_FILES['adv_img']['tmp_name'], _PS_MODULE_DIR_.$this->name.'/img/'.$this->adv_imgname.'.'.Configuration::get('BLOCKADVERT_IMG_EXT'))) {
                         $errors .= $this->getTranslator()->trans('File upload error.', [], 'Modules.Advertising.Admin');
                     }
                 }
@@ -205,7 +205,7 @@ class Ps_Advertising extends Module implements WidgetInterface
             $this->initialize();
             $this->_clearCache('ps_advertising');
 
-            if (!$errors) {
+            if ( ! $errors) {
                 Tools::redirectAdmin(AdminController::$currentIndex.'&configure='.$this->name.'&token='.Tools::getAdminTokenLite('AdminModules').'&conf=6');
             }
             echo $this->displayError($errors);
@@ -335,8 +335,8 @@ class Ps_Advertising extends Module implements WidgetInterface
 
     public function renderWidget($hookName, array $configuration)
     {
-        if (('displayLeftColumn' === $hookName && !Configuration::get('BLOCKADVERT_LEFT_COLUMN')) ||
-            ('displayRightColumn' === $hookName && !Configuration::get('BLOCKADVERT_RIGHT_COLUMN'))) {
+        if (('displayLeftColumn' === $hookName && ! Configuration::get('BLOCKADVERT_LEFT_COLUMN')) ||
+            ('displayRightColumn' === $hookName && ! Configuration::get('BLOCKADVERT_RIGHT_COLUMN'))) {
             return false;
         }
 
