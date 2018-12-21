@@ -230,7 +230,7 @@ class Ps_Advertising extends Module implements WidgetInterface
             'form' => [
                 'legend' => [
                     'title' => $this->getTranslator()->trans('Configuration', [], 'Admin.Global'),
-                    'icon' => 'icon-cogs'
+                    'icon' => 'icon-cogs',
                 ],
                 'input' => [
                     [
@@ -249,7 +249,7 @@ class Ps_Advertising extends Module implements WidgetInterface
                         'type' => 'text',
                         'label' => $this->getTranslator()->trans('Title of the target link', [], 'Modules.Advertising.Admin'),
                         'name' => 'adv_title',
-                        'desc' => $this->getTranslator()->trans('This title will be displayed when you mouse over the advertisement block in your shop.', [], 'Modules.Advertising.Admin')
+                        'desc' => $this->getTranslator()->trans('This title will be displayed when you mouse over the advertisement block in your shop.', [], 'Modules.Advertising.Admin'),
                     ],
                     [
                         'type' => 'switch',
@@ -260,13 +260,13 @@ class Ps_Advertising extends Module implements WidgetInterface
                             [
                                 'id' => 'active_on',
                                 'value' => 1,
-                                'label' => $this->getTranslator()->trans('Enabled', [], 'Admin.Global')
+                                'label' => $this->getTranslator()->trans('Enabled', [], 'Admin.Global'),
                             ],
                             [
                                 'id' => 'active_off',
                                 'value' => 0,
-                                'label' => $this->getTranslator()->trans('Disabled', [], 'Admin.Global')
-                            ]
+                                'label' => $this->getTranslator()->trans('Disabled', [], 'Admin.Global'),
+                            ],
                         ],
                     ],
                     [
@@ -278,19 +278,19 @@ class Ps_Advertising extends Module implements WidgetInterface
                             [
                                 'id' => 'active_on',
                                 'value' => 1,
-                                'label' => $this->getTranslator()->trans('Enabled', [], 'Admin.Global')
+                                'label' => $this->getTranslator()->trans('Enabled', [], 'Admin.Global'),
                             ],
                             [
                                 'id' => 'active_off',
                                 'value' => 0,
-                                'label' => $this->getTranslator()->trans('Disabled', [], 'Admin.Global')
-                            ]
+                                'label' => $this->getTranslator()->trans('Disabled', [], 'Admin.Global'),
+                            ],
                         ],
                     ],
                 ],
                 'submit' => [
                     'title' => $this->getTranslator()->trans('Save', [], 'Admin.Actions'),
-                ]
+                ],
             ],
         ];
 
@@ -308,7 +308,7 @@ class Ps_Advertising extends Module implements WidgetInterface
         $helper->tpl_vars = [
             'fields_value' => $this->getConfigFieldsValues(),
             'languages' => $this->context->controller->getLanguages(),
-            'id_language' => $this->context->language->id
+            'id_language' => $this->context->language->id,
         ];
 
         return $helper->generateForm([$fields_form]);
