@@ -67,21 +67,21 @@ class Ps_Advertising extends Module implements WidgetInterface
     {
         $this->adv_imgname = 'advertising';
         if ((Shop::getContext() == Shop::CONTEXT_GROUP || Shop::getContext() == Shop::CONTEXT_SHOP)
-            && file_exists(_PS_MODULE_DIR_.$this->name.'/img/'.$this->adv_imgname.'-g'.$this->context->shop->getContextShopGroupID().'.'.Configuration::get('BLOCKADVERT_IMG_EXT'))
+            && file_exists(_PS_MODULE_DIR_ . $this->name . '/img/' . $this->adv_imgname . '-g' . $this->context->shop->getContextShopGroupID() . '.' . Configuration::get('BLOCKADVERT_IMG_EXT'))
         ) {
-            $this->adv_imgname .= '-g'.$this->context->shop->getContextShopGroupID();
+            $this->adv_imgname .= '-g' . $this->context->shop->getContextShopGroupID();
         }
         if (Shop::getContext() == Shop::CONTEXT_SHOP
-            && file_exists(_PS_MODULE_DIR_.$this->name.'/img/'.$this->adv_imgname.'-s'.$this->context->shop->getContextShopID().'.'.Configuration::get('BLOCKADVERT_IMG_EXT'))
+            && file_exists(_PS_MODULE_DIR_ . $this->name . '/img/' . $this->adv_imgname . '-s' . $this->context->shop->getContextShopID() . '.' . Configuration::get('BLOCKADVERT_IMG_EXT'))
         ) {
-            $this->adv_imgname .= '-s'.$this->context->shop->getContextShopID();
+            $this->adv_imgname .= '-s' . $this->context->shop->getContextShopID();
         }
 
         // If none of them available go default
         if ($this->adv_imgname == 'advertising') {
-            $this->adv_img = Tools::getMediaServer($this->name)._MODULE_DIR_.$this->name.'/img/fixtures/'.$this->adv_imgname.'.jpg';
+            $this->adv_img = Tools::getMediaServer($this->name) . _MODULE_DIR_ . $this->name . '/img/fixtures/' . $this->adv_imgname . '.jpg';
         } else {
-            $this->adv_img = Tools::getMediaServer($this->name)._MODULE_DIR_.$this->name.'/img/'.$this->adv_imgname.'.'.Configuration::get('BLOCKADVERT_IMG_EXT');
+            $this->adv_img = Tools::getMediaServer($this->name) . _MODULE_DIR_ . $this->name . '/img/' . $this->adv_imgname . '.' . Configuration::get('BLOCKADVERT_IMG_EXT');
         }
         $this->adv_link = htmlentities(Configuration::get('BLOCKADVERT_LINK'), ENT_QUOTES, 'UTF-8');
         $this->adv_title = htmlentities(Configuration::get('BLOCKADVERT_TITLE'), ENT_QUOTES, 'UTF-8');
@@ -102,7 +102,7 @@ class Ps_Advertising extends Module implements WidgetInterface
             Configuration::updateGlobalValue('BLOCKADVERT_LEFT_COLUMN', true);
             Configuration::updateGlobalValue('BLOCKADVERT_RIGHT_COLUMN', true);
             // Try to update with the extension of the image that exists in the module directory
-            foreach (scandir(_PS_MODULE_DIR_.$this->name) as $file) {
+            foreach (scandir(_PS_MODULE_DIR_ . $this->name) as $file) {
                 if (in_array($file, ['advertising.jpg', 'advertising.gif', 'advertising.png'])) {
                     Configuration::updateGlobalValue('BLOCKADVERT_IMG_EXT', substr($file, strrpos($file, '.') + 1));
                 }
@@ -134,8 +134,8 @@ class Ps_Advertising extends Module implements WidgetInterface
     private function _deleteCurrentImg()
     {
         // Delete the image file
-        if ($this->adv_imgname != 'advertising' && file_exists(_PS_MODULE_DIR_.$this->name.'/img/'.$this->adv_imgname.'.'.Configuration::get('BLOCKADVERT_IMG_EXT'))) {
-            unlink(_PS_MODULE_DIR_.$this->name.'/img/'.$this->adv_imgname.'.'.Configuration::get('BLOCKADVERT_IMG_EXT'));
+        if ($this->adv_imgname != 'advertising' && file_exists(_PS_MODULE_DIR_ . $this->name . '/img/' . $this->adv_imgname . '.' . Configuration::get('BLOCKADVERT_IMG_EXT'))) {
+            unlink(_PS_MODULE_DIR_ . $this->name . '/img/' . $this->adv_imgname . '.' . Configuration::get('BLOCKADVERT_IMG_EXT'));
         }
 
         // Update the extension to the global value or the shop group value if available
@@ -163,13 +163,13 @@ class Ps_Advertising extends Module implements WidgetInterface
                     // Set the image name with a name contextual to the shop context
                     $this->adv_imgname = 'advertising';
                     if (Shop::getContext() == Shop::CONTEXT_GROUP) {
-                        $this->adv_imgname = 'advertising-g'.(int) $this->context->shop->getContextShopGroupID();
+                        $this->adv_imgname = 'advertising-g' . (int) $this->context->shop->getContextShopGroupID();
                     } elseif (Shop::getContext() == Shop::CONTEXT_SHOP) {
-                        $this->adv_imgname = 'advertising-s'.(int) $this->context->shop->getContextShopID();
+                        $this->adv_imgname = 'advertising-s' . (int) $this->context->shop->getContextShopID();
                     }
 
                     // Copy the image in the module directory with its new name
-                    if ( ! move_uploaded_file($_FILES['adv_img']['tmp_name'], _PS_MODULE_DIR_.$this->name.'/img/'.$this->adv_imgname.'.'.Configuration::get('BLOCKADVERT_IMG_EXT'))) {
+                    if ( ! move_uploaded_file($_FILES['adv_img']['tmp_name'], _PS_MODULE_DIR_ . $this->name . '/img/' . $this->adv_imgname . '.' . Configuration::get('BLOCKADVERT_IMG_EXT'))) {
                         $errors .= $this->getTranslator()->trans('File upload error.', [], 'Modules.Advertising.Admin');
                     }
                 }
@@ -206,7 +206,7 @@ class Ps_Advertising extends Module implements WidgetInterface
             $this->_clearCache('ps_advertising');
 
             if ( ! $errors) {
-                Tools::redirectAdmin(AdminController::$currentIndex.'&configure='.$this->name.'&token='.Tools::getAdminTokenLite('AdminModules').'&conf=6');
+                Tools::redirectAdmin(AdminController::$currentIndex . '&configure=' . $this->name . '&token=' . Tools::getAdminTokenLite('AdminModules') . '&conf=6');
             }
             echo $this->displayError($errors);
         }
@@ -238,7 +238,7 @@ class Ps_Advertising extends Module implements WidgetInterface
                         'label' => $this->getTranslator()->trans('Image for the advertisement', [], 'Modules.Advertising.Admin'),
                         'name' => 'adv_img',
                         'desc' => $this->getTranslator()->trans('By default the image will appear in the left column. The recommended dimensions are 155 x 163px.', [], 'Modules.Advertising.Admin'),
-                        'thumb' => $this->context->link->protocol_content.$this->adv_img,
+                        'thumb' => $this->context->link->protocol_content . $this->adv_img,
                     ],
                     [
                         'type' => 'text',
@@ -303,7 +303,7 @@ class Ps_Advertising extends Module implements WidgetInterface
         $this->fields_form = [];
         $helper->identifier = $this->identifier;
         $helper->submit_action = 'submitAdvConf';
-        $helper->currentIndex = $this->context->link->getAdminLink('AdminModules', false).'&configure='.$this->name.'&tab_module='.$this->tab.'&module_name='.$this->name;
+        $helper->currentIndex = $this->context->link->getAdminLink('AdminModules', false) . '&configure=' . $this->name . '&tab_module=' . $this->tab . '&module_name=' . $this->name;
         $helper->token = Tools::getAdminTokenLite('AdminModules');
         $helper->tpl_vars = [
             'fields_value' => $this->getConfigFieldsValues(),
@@ -327,7 +327,7 @@ class Ps_Advertising extends Module implements WidgetInterface
     public function getWidgetVariables($hookName, array $configuration)
     {
         return [
-            'image' => $this->context->link->protocol_content.$this->adv_img,
+            'image' => $this->context->link->protocol_content . $this->adv_img,
             'adv_link' => $this->adv_link,
             'adv_title' => $this->adv_title,
         ];
