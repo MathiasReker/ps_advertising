@@ -156,7 +156,7 @@ class Ps_Advertising extends Module implements WidgetInterface
 
         $errors = '';
         if (Tools::isSubmit('submitAdvConf')) {
-            if (isset($_FILES['adv_img']) && isset($_FILES['adv_img']['tmp_name']) && !empty($_FILES['adv_img']['tmp_name'])) {
+            if (isset($_FILES['adv_img'], $_FILES['adv_img']['tmp_name'])   && !empty($_FILES['adv_img']['tmp_name'])) {
                 if ($error = ImageManager::validateUpload($_FILES['adv_img'], Tools::convertBytes(ini_get('upload_max_filesize')))) {
                     $errors .= $error;
                 } else {
