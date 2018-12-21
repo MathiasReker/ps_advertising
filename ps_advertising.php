@@ -32,16 +32,16 @@ if (!defined('_PS_VERSION_')) {
 
 class Ps_Advertising extends Module implements WidgetInterface
 {
-    /* Title associated to the image */
+    // Title associated to the image
     public $adv_title;
 
-    /* Link associated to the image */
+    // Link associated to the image
     public $adv_link;
 
-    /* Name of the image without extension */
+    // Name of the image without extension
     public $adv_imgname;
 
-    /* Image path with extension */
+    // Image path with extension
     public $adv_img;
 
     public function __construct()
@@ -62,9 +62,7 @@ class Ps_Advertising extends Module implements WidgetInterface
         $this->initialize();
     }
 
-    /*
-     * Set the properties of the module, like the link to the image and the title (contextual to the current shop context)
-     */
+    // Set the properties of the module, like the link to the image and the title (contextual to the current shop context)
     protected function initialize()
     {
         $this->adv_imgname = 'advertising';
