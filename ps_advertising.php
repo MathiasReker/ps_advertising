@@ -55,9 +55,9 @@ class Ps_Advertising extends Module implements WidgetInterface
         $this->bootstrap = true;
         parent::__construct();
 
-        $this->displayName = $this->getTranslator()->trans('Advertising block', array(), 'Modules.Advertising.Admin');
-        $this->description = $this->getTranslator()->trans('Adds an advertisement block to selected sections of your e-commerce website.', array(), 'Modules.Advertising.Admin');
-        $this->ps_versions_compliancy = array('min' => '1.7.1.0', 'max' => _PS_VERSION_);
+        $this->displayName = $this->getTranslator()->trans('Advertising block', [], 'Modules.Advertising.Admin');
+        $this->description = $this->getTranslator()->trans('Adds an advertisement block to selected sections of your e-commerce website.', [], 'Modules.Advertising.Admin');
+        $this->ps_versions_compliancy = ['min' => '1.7.1.0', 'max' => _PS_VERSION_];
 
         $this->initialize();
     }
@@ -105,7 +105,7 @@ class Ps_Advertising extends Module implements WidgetInterface
             Configuration::updateGlobalValue('BLOCKADVERT_RIGHT_COLUMN', true);
             // Try to update with the extension of the image that exists in the module directory
             foreach (scandir(_PS_MODULE_DIR_.$this->name) as $file) {
-                if (in_array($file, array('advertising.jpg', 'advertising.gif', 'advertising.png'))) {
+                if (in_array($file, ['advertising.jpg', 'advertising.gif', 'advertising.png'])) {
                     Configuration::updateGlobalValue('BLOCKADVERT_IMG_EXT', substr($file, strrpos($file, '.') + 1));
                 }
             }
@@ -113,7 +113,7 @@ class Ps_Advertising extends Module implements WidgetInterface
             return true;
         }
 
-        $this->_errors[] = $this->getTranslator()->trans('This module needs to be hooked to a column, but your theme does not implement one', array(), 'Modules.Advertising.Admin');
+        $this->_errors[] = $this->getTranslator()->trans('This module needs to be hooked to a column, but your theme does not implement one', [], 'Modules.Advertising.Admin');
         parent::uninstall();
 
         return false;
@@ -172,7 +172,7 @@ class Ps_Advertising extends Module implements WidgetInterface
 
                     // Copy the image in the module directory with its new name
                     if (!move_uploaded_file($_FILES['adv_img']['tmp_name'], _PS_MODULE_DIR_.$this->name.'/img/'.$this->adv_imgname.'.'.Configuration::get('BLOCKADVERT_IMG_EXT'))) {
-                        $errors .= $this->getTranslator()->trans('File upload error.', array(), 'Modules.Advertising.Admin');
+                        $errors .= $this->getTranslator()->trans('File upload error.', [], 'Modules.Advertising.Admin');
                     }
                 }
             }
@@ -228,73 +228,73 @@ class Ps_Advertising extends Module implements WidgetInterface
 
     public function renderForm()
     {
-        $fields_form = array(
-            'form' => array(
-                'legend' => array(
-                    'title' => $this->getTranslator()->trans('Configuration', array(), 'Admin.Global'),
+        $fields_form = [
+            'form' => [
+                'legend' => [
+                    'title' => $this->getTranslator()->trans('Configuration', [], 'Admin.Global'),
                     'icon' => 'icon-cogs'
-                ),
-                'input' => array(
-                    array(
+                ],
+                'input' => [
+                    [
                         'type' => 'file',
-                        'label' => $this->getTranslator()->trans('Image for the advertisement', array(), 'Modules.Advertising.Admin'),
+                        'label' => $this->getTranslator()->trans('Image for the advertisement', [], 'Modules.Advertising.Admin'),
                         'name' => 'adv_img',
-                        'desc' => $this->getTranslator()->trans('By default the image will appear in the left column. The recommended dimensions are 155 x 163px.', array(), 'Modules.Advertising.Admin'),
+                        'desc' => $this->getTranslator()->trans('By default the image will appear in the left column. The recommended dimensions are 155 x 163px.', [], 'Modules.Advertising.Admin'),
                         'thumb' => $this->context->link->protocol_content.$this->adv_img,
-                    ),
-                    array(
+                    ],
+                    [
                         'type' => 'text',
-                        'label' => $this->getTranslator()->trans('Target link for the image', array(), 'Modules.Advertising.Admin'),
+                        'label' => $this->getTranslator()->trans('Target link for the image', [], 'Modules.Advertising.Admin'),
                         'name' => 'adv_link',
-                    ),
-                    array(
+                    ],
+                    [
                         'type' => 'text',
-                        'label' => $this->getTranslator()->trans('Title of the target link', array(), 'Modules.Advertising.Admin'),
+                        'label' => $this->getTranslator()->trans('Title of the target link', [], 'Modules.Advertising.Admin'),
                         'name' => 'adv_title',
-                        'desc' => $this->getTranslator()->trans('This title will be displayed when you mouse over the advertisement block in your shop.', array(), 'Modules.Advertising.Admin')
-                    ),
-                    array(
+                        'desc' => $this->getTranslator()->trans('This title will be displayed when you mouse over the advertisement block in your shop.', [], 'Modules.Advertising.Admin')
+                    ],
+                    [
                         'type' => 'switch',
-                        'label' => $this->getTranslator()->trans('Display in the left column', array(), 'Modules.Advertising.Admin'),
+                        'label' => $this->getTranslator()->trans('Display in the left column', [], 'Modules.Advertising.Admin'),
                         'name' => 'left_column',
                         'is_bool' => true,
-                        'values' => array(
-                                array(
+                        'values' => [
+                                [
                                     'id' => 'active_on',
                                     'value' => 1,
-                                    'label' => $this->getTranslator()->trans('Enabled', array(), 'Admin.Global')
-                                ),
-                                array(
+                                    'label' => $this->getTranslator()->trans('Enabled', [], 'Admin.Global')
+                                ],
+                                [
                                     'id' => 'active_off',
                                     'value' => 0,
-                                    'label' => $this->getTranslator()->trans('Disabled', array(), 'Admin.Global')
-                                )
-                        ),
-                    ),
-                    array(
+                                    'label' => $this->getTranslator()->trans('Disabled', [], 'Admin.Global')
+                                ]
+                        ],
+                    ],
+                    [
                         'type' => 'switch',
-                        'label' => $this->getTranslator()->trans('Display in the right column', array(), 'Modules.Advertising.Admin'),
+                        'label' => $this->getTranslator()->trans('Display in the right column', [], 'Modules.Advertising.Admin'),
                         'name' => 'right_column',
                         'is_bool' => true,
-                        'values' => array(
-                            array(
+                        'values' => [
+                            [
                                 'id' => 'active_on',
                                 'value' => 1,
-                                'label' => $this->getTranslator()->trans('Enabled', array(), 'Admin.Global')
-                            ),
-                            array(
+                                'label' => $this->getTranslator()->trans('Enabled', [], 'Admin.Global')
+                            ],
+                            [
                                 'id' => 'active_off',
                                 'value' => 0,
-                                'label' => $this->getTranslator()->trans('Disabled', array(), 'Admin.Global')
-                            )
-                        ),
-                    ),
-                ),
-                'submit' => array(
-                    'title' => $this->getTranslator()->trans('Save', array(), 'Admin.Actions'),
-                )
-            ),
-        );
+                                'label' => $this->getTranslator()->trans('Disabled', [], 'Admin.Global')
+                            ]
+                        ],
+                    ],
+                ],
+                'submit' => [
+                    'title' => $this->getTranslator()->trans('Save', [], 'Admin.Actions'),
+                ]
+            ],
+        ];
 
         $helper = new HelperForm();
         $helper->show_toolbar = false;
@@ -302,37 +302,37 @@ class Ps_Advertising extends Module implements WidgetInterface
         $lang = new Language((int)Configuration::get('PS_LANG_DEFAULT'));
         $helper->default_form_language = $lang->id;
         $helper->allow_employee_form_lang = Configuration::get('PS_BO_ALLOW_EMPLOYEE_FORM_LANG') ? Configuration::get('PS_BO_ALLOW_EMPLOYEE_FORM_LANG') : 0;
-        $this->fields_form = array();
+        $this->fields_form = [];
         $helper->identifier = $this->identifier;
         $helper->submit_action = 'submitAdvConf';
         $helper->currentIndex = $this->context->link->getAdminLink('AdminModules', false).'&configure='.$this->name.'&tab_module='.$this->tab.'&module_name='.$this->name;
         $helper->token = Tools::getAdminTokenLite('AdminModules');
-        $helper->tpl_vars = array(
+        $helper->tpl_vars = [
             'fields_value' => $this->getConfigFieldsValues(),
             'languages' => $this->context->controller->getLanguages(),
             'id_language' => $this->context->language->id
-        );
+        ];
 
-        return $helper->generateForm(array($fields_form));
+        return $helper->generateForm([$fields_form]);
     }
 
     public function getConfigFieldsValues()
     {
-        return array(
+        return [
             'adv_link' => Tools::getValue('adv_link', Configuration::get('BLOCKADVERT_LINK')),
             'adv_title' => Tools::getValue('adv_title', Configuration::get('BLOCKADVERT_TITLE')),
             'left_column' => Tools::getValue('left_column', Configuration::get('BLOCKADVERT_LEFT_COLUMN')),
             'right_column' => Tools::getValue('right_column', Configuration::get('BLOCKADVERT_RIGHT_COLUMN')),
-        );
+        ];
     }
 
     public function getWidgetVariables($hookName, array $configuration)
     {
-        return array(
+        return [
             'image' => $this->context->link->protocol_content.$this->adv_img,
             'adv_link' => $this->adv_link,
             'adv_title' => $this->adv_title,
-        );
+        ];
     }
 
     public function renderWidget($hookName, array $configuration)
