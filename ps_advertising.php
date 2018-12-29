@@ -131,7 +131,6 @@ class Ps_Advertising extends Module implements WidgetInterface
     /**
      * delete the contextual image (it is not allowed to delete the default image)
      *
-     * @return void
      */
     private function _deleteCurrentImg()
     {
