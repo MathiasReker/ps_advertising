@@ -259,16 +259,16 @@ class Ps_Advertising extends Module implements WidgetInterface
                         'name' => 'left_column',
                         'is_bool' => true,
                         'values' => array(
-                                array(
-                                    'id' => 'active_on',
-                                    'value' => 1,
-                                    'label' => $this->getTranslator()->trans('Enabled', array(), 'Admin.Global')
-                                ),
-                                array(
-                                    'id' => 'active_off',
-                                    'value' => 0,
-                                    'label' => $this->getTranslator()->trans('Disabled', array(), 'Admin.Global')
-                                )
+                            array(
+                                'id' => 'active_on',
+                                'value' => 1,
+                                'label' => $this->getTranslator()->trans('Enabled', array(), 'Admin.Global')
+                            ),
+                            array(
+                                'id' => 'active_off',
+                                'value' => 0,
+                                'label' => $this->getTranslator()->trans('Disabled', array(), 'Admin.Global')
+                            )
                         ),
                     ),
                     array(
